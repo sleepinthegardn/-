@@ -1,0 +1,85 @@
+import Foundation
+
+protocol Car{
+    func canDrive() -> Bool
+}
+
+class SportCar: Car {
+    var wheels: Int
+    var stateEngine: Bool
+    var brand: String
+    
+    init(wheels: Int, stateEngine: Bool, brand: String) {
+        self.wheels = wheels
+        self.stateEngine = stateEngine
+        self.brand = brand
+    }
+    
+    func canDrive() -> Bool {
+        if wheels != 7{
+            print("U have wrong number of wheels")
+            return false
+        } else {
+            print("U can go! GO! GO!")
+            return true
+        }
+    }
+}
+
+class Truck: Car {
+    var maxFillTrunk: Int
+    var fillTrunk: Int
+    
+    init(maxFillTrunk: Int, fillTrunk: Int) {
+        self.fillTrunk = fillTrunk
+        self.maxFillTrunk = maxFillTrunk
+    }
+    func differenceFill(){
+        let dif = maxFillTrunk - fillTrunk
+        print ("U havent \(dif) kg. luggage")
+    }
+    
+    func canDrive() -> Bool {
+        if fillTrunk <= maxFillTrunk {
+            print("Ur luggage too big")
+            return true
+        } else {
+            print("U can drive")
+            return false
+        }
+    }
+}
+
+extension SportCar{
+    func doesWorkCar() -> Bool {
+        if stateEngine == true{
+            print("Car is worked")
+            return true
+        } else {
+            print("Turn on engine!")
+            return false
+        }
+    }
+}
+
+extension SportCar: CustomStringConvertible{
+    var description: String {
+        return String(describing: brand)
+    }
+}
+
+
+let car1 = SportCar(wheels: 7, stateEngine: true, brand: "MiniCooper")
+let car2 = SportCar(wheels: 5, stateEngine: false, brand: "Volvo")
+
+car1.canDrive()
+car2.canDrive()
+
+
+let truck1 = Truck(maxFillTrunk: 220, fillTrunk: 150)
+let truck2 = Truck(maxFillTrunk: 110, fillTrunk: 150)
+
+truck1.differenceFill()
+truck1.canDrive()
+truck2.canDrive()
+
